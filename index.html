@@ -1,107 +1,116 @@
-<html><head><base href="." />
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Anna van der Linden - Portfolio</title>
-<style>
-:root {
-    --primary: #2a2d3e;
-    --secondary: #1f2129;
-    --accent: #6c5ce7;
-    --text: #ffffff;
-}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna van der Linden - Portfolio</title>
+    <style>
+        :root {
+            --primary: #2a2d3e;
+            --secondary: #1f2129;
+            --accent: #6c5ce7;
+            --text: #ffffff;
+        }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--secondary);
-    color: var(--text);
-    margin: 0;
-    padding: 20px;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--secondary);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
 
-.portfolio-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--primary);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--primary);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
 
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-.avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-}
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text);
+        }
 
-.bio-section {
-    background: var(--primary);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
+        .bio-section {
+            background: var(--primary);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
 
-.interests {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-}
+        .interests {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
 
-.interest-tag {
-    background: var(--accent);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 14px;
-}
-
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        .interest-tag {
+            background: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="portfolio-container">
+        <div class="header">
+            <div class="profile">
+                <div class="avatar" aria-label="Profielafbeelding">AL</div>
+                <div>
+                    <h1>Anna van der Linden</h1>
+                    <p>Blockchain Developer & Smart Contract Specialist</p>
+                </div>
+            </div>
+        </div>
 
-<div class="portfolio-container">
-    <div class="header">
-        <div class="profile">
-            <div class="avatar">AL</div>
-            <div>
-                <h1>Anna van der Linden</h1>
-                <p>Blockchain Developer & Smart Contract Specialist</p>
+        <div class="bio-section">
+            <h2>Over mij</h2>
+            <p>
+                Als blockchain developer met een passie voor innovatieve technologie, focus ik me op het ontwikkelen van 
+                veilige en efficiënte smart contracts en gedecentraliseerde applicaties. Met mijn achtergrond in 
+                computerwetenschappen draag ik bij aan de toekomst van Web3 en DeFi-oplossingen.
+            </p>
+            
+            <h3>Expertisegebieden</h3>
+            <div class="interests">
+                <span class="interest-tag">Smart Contracts</span>
+                <span class="interest-tag">Solidity</span>
+                <span class="interest-tag">DeFi Development</span>
+                <span class="interest-tag">Web3</span>
+                <span class="interest-tag">Ethereum</span>
+                <span class="interest-tag">Blockchain Security</span>
             </div>
         </div>
     </div>
-
-    <div class="bio-section">
-        <h2>Over mij</h2>
-        <p>Als blockchain developer met een passie voor innovatieve technologie, focus ik me op het ontwikkelen van veilige en efficiënte smart contracts en gedecentraliseerde applicaties. Met mijn achtergrond in computerwetenschappen draag ik bij aan de toekomst van Web3 en DeFi-oplossingen.</p>
-        
-        <h3>Expertisegebieden</h3>
-        <div class="interests">
-            <span class="interest-tag">Smart Contracts</span>
-            <span class="interest-tag">Solidity</span>
-            <span class="interest-tag">DeFi Development</span>
-            <span class="interest-tag">Web3</span>
-            <span class="interest-tag">Ethereum</span>
-            <span class="interest-tag">Blockchain Security</span>
-        </div>
-    </div>
-</div>
-
-</body></html>
+    <script src="index.js"></script>
+</body>
+</html>
